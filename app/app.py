@@ -11,7 +11,7 @@ def main():
     cur = conn.cursor()
     cur.execute('SELECT version();')
     version = cur.fetchone()[0]
-    print(f'Connected to PostgreSQL: {version}')
+    print(f'DB version: {version}')
     cur.close()
     conn.close()
 
