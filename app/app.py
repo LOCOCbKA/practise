@@ -1,5 +1,6 @@
 import psycopg2
 import os
+import datetime
 
 def main():
     conn = psycopg2.connect(
@@ -17,3 +18,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+print(f'Current time: {datetime.datetime.now()}')
