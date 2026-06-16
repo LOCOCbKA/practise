@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: app_db
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: testdb
+    ports:
+      - "80:80"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: app_client
+    environment:
+      DB_HOST: db
+      DB_NAME: testdb
+      DB_USER: testuser
+      DB_PASSWORD: testpass
+    depends_on:
+      - db
+    restart: on-failure
+
+volumes:
+  pgdata:
